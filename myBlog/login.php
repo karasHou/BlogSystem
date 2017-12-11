@@ -18,8 +18,8 @@ if (isset($_POST['sub'])) {
     if ($result) {
 
         //cookie中写入值（可以多个）
-        setcookie('uid', $result['uid'], time() + 180);
-        setcookie('uname', $result['uname'], time() + 180);
+        setcookie('uid', $result['uid']);
+        setcookie('uname', $result['uname']);
 //        setcookie('uid', $result['uid']);
 //        setcookie('uname', $result['uname']);
 
