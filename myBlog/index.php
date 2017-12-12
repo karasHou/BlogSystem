@@ -72,10 +72,14 @@
         </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>
+
+<img src="img/banner.jpg" class="img-responsive" alt="" style="height: 150px;width: 100%; margin-top: -50px">
+
+
 <section class="container user-select">
     <header style="top: 50px">
-        <div class="hidden-xs header"><!--超小屏幕不显示-->
-            <h3 class="text text-center" style="margin-top: 70px;">...</h3>
+        <div class="hidden-xs header" style="margin-top: 150px;"><!--超小屏幕不显示-->
+            <h3 class="text text-center">...</h3>
             <ul class="nav hidden-xs-nav">
                 <li class="active"><a
                             href="http://www.17sucai.com/preview/512263/2016-04-05/%E5%BC%82%E6%B8%85%E8%BD%A9%E5%8D%9A%E5%AE%A28/index.html"><span

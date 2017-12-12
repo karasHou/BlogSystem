@@ -83,7 +83,6 @@ body, input, button, textarea, select {
     top: 0;
     bottom: 0;
     width: 190px;
-    background-color: #f6f6f6;
     z-index: 99;
     display: block;
 }
