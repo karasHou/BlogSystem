@@ -2,7 +2,16 @@
 
 include "connect.php";
 
+if (isset($_GET['page'])) {
+
+    //将当期转来的页面写入cookie
+    setcookie('page', $_GET['page']);
+
+}
+
 if (isset($_POST['sub'])) {
+
+    echo "post";
 
     $uname = $_POST['uname'];
     $pass = $_POST['pass'];
@@ -16,17 +25,28 @@ if (isset($_POST['sub'])) {
 
     //查询到，可以登录
     if ($result) {
-
         //cookie中写入值（可以多个）
         setcookie('uid', $result['uid']);
         setcookie('uname', $result['uname']);
-//        setcookie('uid', $result['uid']);
-//        setcookie('uname', $result['uname']);
+        setcookie('mood', $result['mood']);
 
-        header("location:index.php");
+
+        //从cookie取出当前页面的page值
+        $page = $_COOKIE['page'];
+
+
+        //如果包含1，说明是index界面调用的login
+        if ($page == 1) {
+            header("location:index.php");
+        } else if ($page == 2) {
+            header("location:personal.php");
+        } else if ($page == 3) {
+            header("location:all.php");
+        }
+
 
     } else {
-        //登录不成功，需要重新登录
+//        登录不成功，需要重新登录
         echo "<script>alert('该用户不存在,请重新登录!')</script>";
 
     }

@@ -45,7 +45,7 @@
             <ul class="nav navbar-nav">
                 <p class="navbar-text">欢迎~</p>
                 <li class="active"><a href="#">主页</a></li>
-                <li><a href="#">我的博客空间</a></li>
+                <li><a href="personal.php">我的博客空间</a></li>
                 <li class="dropdown">
                 </li>
             </ul>
@@ -63,7 +63,8 @@
                          </p>";
                     echo "<li><a href='ulogin.php'><strong>注销</strong></a></li>";
                 } else {
-                    echo "<li><a href='login.php'><span class=\"alert alert-info\" role=\"alert\" style='padding: 10px'>未登录</span></a></li>";
+//                    这里标明index页面为 1
+                    echo "<li><a href='login.php?page=1'><span class=\"alert alert-info\" role=\"alert\" style='padding: 10px'>未登录</span></a></li>";
                 }
                 ?>
 
@@ -151,14 +152,11 @@
                         $w = 1;
                         //    select * from blog where 1 也是显示全部
                     }
-
                     //排序：asc正序  desc倒序
                     $sql = "select * from blog where $w order by bid desc";
 
-
                     //直接查询返回结果是resource，需要转换成array类型才能正常显示
                     $query = mysqli_query($link, $sql); //查询结果返回resource类型
-
 
                     //开始读取，逐行读取，指针下移
                     while ($arr = mysqli_fetch_array($query)) {

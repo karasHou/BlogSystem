@@ -6,6 +6,7 @@ if (isset($_POST['sub'])) {
 
     $uname = $_POST['uname'];
     $pass = $_POST['pass'];
+    $mood = $_POST['mood'];
 
     //检测重名
     $sql = "select * from user where uname = '$uname'";
@@ -18,7 +19,7 @@ if (isset($_POST['sub'])) {
     } else {
         //未重名
         //不重名，写入到数据库中，跳转登录界面
-        $sql = "insert into user(uid,uname,pass) values(null,'$uname','$pass')";
+        $sql = "insert into user(uid,uname,pass,mood) values(null,'$uname','$pass','$mood')";
         $query = mysqli_query($link, $sql);
         echo "<script>location = 'login.php'</script>";
     }
@@ -61,6 +62,11 @@ if (isset($_POST['sub'])) {
         </div>
         <div>
             <input type="password" name="pass2" class="password" placeholder="Check Password"
+                   oncontextmenu="return false"
+                   onpaste="return false"/>
+        </div>
+        <div>
+            <input type="text" name="mood" placeholder="个性签名"
                    oncontextmenu="return false"
                    onpaste="return false"/>
         </div>
