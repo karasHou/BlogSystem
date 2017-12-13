@@ -1,3 +1,28 @@
+<?php
+include "connect.php";
+if (isset($_GET['bid'])) {
+    $bid = $_GET['bid'];
+    $sql = "update blog set hits=hits+1 where bid = '$bid'";
+    $query = mysqli_query($link, $sql);
+    if ($query) {
+        //显示当前页
+        $sql = "select * from blog where bid='$bid'";
+        $query = mysqli_query($link, $sql);
+        //得到转换后的数组
+        $arr = mysqli_fetch_array($query);
+
+        //查询对应文章的作者
+        $uid = $arr['writer'];
+        $sql_w = "select uname from user where  '$uid' = uid";
+
+
+        $query_w = mysqli_query($link, $sql_w);
+        if ($query_w) {
+            $arr_w = mysqli_fetch_array($query_w);
+        }
+    }
+}
+?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -42,10 +67,19 @@
                         <ul class="nav navbar-nav">
                             <p class="navbar-text">欢迎~</p>
                             <li><a href="index.php">主页</a></li>
-                            <li><a href="personal.php">我的博客空间</a></li>
+                            <li><a href="
+                                <?php
+
+                                if (isset($_COOKIE['uid'])) {
+
+                                    $uid = $_COOKIE['uid'];
+                                    echo "personal.php?writer=$uid";
+
+                                }
+
+                                ?>
+                            ">我的博客空间</a></li>
                             <li class="active"><a>文章详情</a></li>
-                            <li class="dropdown">
-                            </li>
                         </ul>
 
                         <ul class="nav navbar-nav navbar-right">
@@ -73,12 +107,25 @@
             </nav>
 
             <div class="row" style="margin-top: 50px;">
-                <div class="col-md-3" style="background: #ff00ff;height: 1000px;">侧边</div>
-                <div class="col-md-9" style="background: #00ff00;height: 1000px;">
+                <div class="col-md-3" style="background: #ff00ff;height: 1000px;">
 
-                    <h3>
+                    <h3>评论</h3>
 
-                    </h3>
+
+                </div>
+                <div class="col-md-9" style="background: #d2ffd2;height: 1000px;">
+
+                    <h3>标题：<?php echo $arr['title'] ?></h3>
+                    <div class="leader">
+                        <span>时间：<?php echo $arr['time'] ?></span>&nbsp;
+                        <span>访问量：<?php echo $arr['hits'] ?></span>&nbsp;
+                        <span>作者：<?php echo $arr_w['uname'] ?></span>&nbsp;
+                    </div>
+
+                    <hr/>
+
+                    <p><?php echo $arr['content'] ?></p>
+                    <hr/>
 
 
                 </div>
