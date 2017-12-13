@@ -80,7 +80,6 @@
 <section class="container user-select">
     <header style="top: 50px">
         <div class="hidden-xs header" style="margin-top: 150px;"><!--超小屏幕不显示-->
-            <h3 class="text text-center">...</h3>
             <ul class="nav hidden-xs-nav">
                 <li class="active"><a
                             href="http://www.17sucai.com/preview/512263/2016-04-05/%E5%BC%82%E6%B8%85%E8%BD%A9%E5%8D%9A%E5%AE%A28/index.html"><span
@@ -209,7 +208,7 @@
                                     </dd>
                                     <dd class="text">
                                         <!--介绍-->
-                                        <?php echo iconv_substr($arr['content'], 0, 10) ?>...
+                                        <?php echo iconv_substr($arr['content'], 0, 30) ?>...
                                     </dd>
                                 </dl>
                                 <div class="news_bot col-sm-7 col-md-8">
@@ -276,7 +275,7 @@
                     <li>
                         <a target="_blank" href="all.php?bid=<?php echo $arr1['bid'] ?>">
                         <span class="text">
-                             <?php echo iconv_substr($arr1['content'], 0, 20) ?>...
+                             <?php echo $arr1['title'] ?>
                             </span>
                             <span class="text-muted">阅读(<?php echo $arr1['hits'] ?>)</span>
                         </a>

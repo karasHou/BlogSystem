@@ -1,47 +1,119 @@
-<!--添加文章的页面-->
-
 <?php
+if (isset($_COOKIE['uid'])) {
+    //保存用户的uid值
+    $uid = $_COOKIE['uid'];
+}
 
-//引入php文件
 include "connect.php";
-//确认是否提交
-if (isset($_POST['sub'])) {
+$htmlData = ''; //要显示的变量
+//当$_POST['content1']不为空
+if (!empty($_POST['content1'])) {
+
+    if (get_magic_quotes_gpc()) {
+        $htmlData = stripslashes($_POST['content1']);
+    } else {
+        $htmlData = $_POST['content1'];
+    }
+    //得到内容$htmlData
+
+    //得到标题
     $title = $_POST['title'];
-    $con = $_POST['con'];
-
-    //    输出标题
-    //    echo $title . "<br/>";
-    //    输出内容
-    //    echo $con;
-
     //写入数据库
     //1、拼字符串
-    $sql = "insert into blog(bid,title,content,time) values(null,'$title','$con',now())";
-    //如果出现bug，可以先把sql语句输出，然后复制命令到navicat中使用查询。
-    //echo $sql;
+    $sql = "insert into blog(bid,title,content,time,writer) values(null,'$title','$htmlData',now(),'$uid')";
+
     //2、发送sql语句
     $query = mysqli_query($link, $sql);
     //查询语句有返回值
     if ($query) {
         //查询成功,跳转(或使用head也可以)
-        echo "<script>location='index.php'</script>";
-
+        echo "<script>alert('插入成功')</script>";
+        header("location:personal.php");
     } else {
         echo "<script>alert('插入失败')</script>";
-        echo "<script>location ='add.php'</script>";
     }
 }
-
 ?>
 
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8"/>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>添加文章</title>
+    <link rel="stylesheet" type="text/css" href="css/normalize.css"/>
+    <link rel="stylesheet" type="text/css" href="css/demo.css"/>
 
-<meta charset="UTF-8">
-<form action="add.php" method="post">
-    <p>
-        标题：<input type="text" name="title" autofocus><br/>
-    </p>
-    <p>
-        内容：<textarea name="con" id="" cols="30" rows="10"></textarea><br/>
-    </p>
-    <input type="submit" name="sub" value="添加文章">
-</form>
+    <!--必要样式-->
+    <link rel="stylesheet" type="text/css" href="css/component.css"/>
+
+    <!--[if IE]>
+    <script src="js/html5.js"></script>
+    <![endif]-->
+
+    <link rel="stylesheet" href="themes/default/default.css"/>
+    <link rel="stylesheet" href="plugins/code/prettify.css"/>
+    <script charset="utf-8" src="js/kindeditor.js"></script>
+    <script charset="utf-8" src="lang/zh_CN.js"></script>
+    <script charset="utf-8" src="plugins/code/prettify.js"></script>
+    <script>
+        KindEditor.ready(function (K) {
+            var editor1 = K.create('textarea[name="content1"]', {
+                uploadJson: '../php/upload_json.php',
+                fileManagerJson: '../php/file_manager_json.php',
+                allowFileManager: true,
+                afterCreate: function () {
+                    var self = this;
+                    K.ctrl(document, 13, function () {
+                        self.sync();
+                        K('form[name=example]')[0].submit();
+                    });
+                    K.ctrl(self.edit.doc, 13, function () {
+                        self.sync();
+                        K('form[name=example]')[0].submit();
+                    });
+                }
+            });
+            prettyPrint();
+        });
+    </script>
+</head>
+<body>
+<div class="container demo-1" style="position: relative">
+    <div class="content" style="position: fixed; top: 0;">
+        <div id="large-header" class="large-header">
+            <canvas id="demo-canvas"></canvas>
+        </div>
+    </div>
+
+    <!--主体内容展示-->
+    <div id="content"
+         style="border-radius:10px;padding: 20px;height: 100%; width: 800px;margin: 20px auto;background: #fdfeff;z-index: 1000;position: relative;opacity: .9;">
+        <h3>添加文章</h3>
+
+        <form name="example" method="post" action="add.php">
+            标题：<input type="text" style="margin: 10px;width: 200px;" name="title" autofocus>
+
+            <textarea name="content1" style="margin: 20px;width:700px;height:200px;visibility:hidden;">
+            <?php echo htmlspecialchars($htmlData); ?>
+        </textarea>
+            <br/>
+            <input type="submit" name="button" value="提交内容"
+                   style="color: #212d25;background: #c9fab9;border: none;border-radius: 5px;"/> (快捷键: Ctrl + Enter)
+            <button type="button" onclick="window.location.href='personal.php'"
+                    style="color: #212d25;border: none;border-radius: 5px;background: #c4ddff;">
+                返回
+            </button>
+        </form>
+
+    </div>
+    <!--主体内容展示-->
+
+</div><!-- /container -->
+<script src="js/TweenLite.min.js"></script>
+<script src="js/EasePack.min.js"></script>
+<script src="js/rAF.js"></script>
+<script src="js/demo-1.js"></script>
+</body>
+</html>

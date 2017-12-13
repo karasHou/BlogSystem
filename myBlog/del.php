@@ -16,7 +16,10 @@ if (isset($_GET['bid'])) {
 
     $query = mysqli_query($link, $sql);
     if ($query) {
-        echo "<script>location='index.php'</script>";
+
+        echo "<script>location='personal.php'</script>";
+
+
     } else {
 
         echo "删除失败";

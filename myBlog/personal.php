@@ -1,3 +1,14 @@
+<?php
+
+//未登录，跳转至登录界面
+if (!$_COOKIE['uid']) {
+
+    header("location:login.php");
+
+}
+
+?>
+
 <!doctype html>
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
@@ -54,7 +65,7 @@
                 if ($_COOKIE['uid']) {
 
                     echo "<li><a style='color: #ff1a22;font-weight: bolder'>" . $_COOKIE['uname'] . "已登录</a></li>";
-                    echo "<li><a href='ulogin.php?page=2' style='font-weight: bolder'>注销</a></li>";
+                    echo "<li><a href='ulogin.php?page=1' style='font-weight: bolder'>注销</a></li>";
 
                 } else {
 
@@ -99,15 +110,17 @@
             </div>
 
 
-
             <?php
 
             $writer = $_GET['writer'];
 
             //如果是博主，可以添加文章
             if ($_COOKIE['uid'] && $_COOKIE['uid'] == $writer) {
+                //保存用户uid
+                $uid = $_COOKIE['uid'];
+
                 echo "
-                       <button type=\"button\" class=\"btn btn-success\" onclick=\"window.location.href='add.php'\">添加文章</button>
+                       <button type=\"button\" class=\"btn btn-success\" onclick=\"window.location.href='add.php?uid=$uid'\">添加文章</button>
                     ";
             }
             ?>
@@ -214,7 +227,7 @@
                     <!--内容-->
                     <p>
                         <!--iconv_substr（）是一个可以可以切割中文的函数（要切的对象，从哪开始，切几个）-->
-                        <?php echo iconv_substr($arr['content'], 0, 15) ?>...
+                        <?php echo iconv_substr($arr['content'], 0, 30) ?>...
 
                     </p>
                     <span style="list-style: none">
