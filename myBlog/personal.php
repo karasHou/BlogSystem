@@ -46,7 +46,7 @@
 
         <div id="templatemo_menu">
             <ul style="position: relative">
-                <li><a href="#" class="current">主页</a></li>
+                <li><a href="index.php" class="current">主页</a></li>
                 <li><a href="index.php" class="current">news</a></li>
                 <li><a href="#" class="current">daily</a></li>
 
@@ -54,7 +54,7 @@
                 if ($_COOKIE['uid']) {
 
                     echo "<li><a style='color: #ff1a22;font-weight: bolder'>" . $_COOKIE['uname'] . "已登录</a></li>";
-                    echo "<li><a href='ulogin.php' style='font-weight: bolder'>注销</a></li>";
+                    echo "<li><a href='ulogin.php?page=2' style='font-weight: bolder'>注销</a></li>";
 
                 } else {
 
@@ -99,26 +99,18 @@
             </div>
 
 
+
             <?php
 
-            //如果登录，可以添加文章
-            if ($_COOKIE['uid']) {
+            $writer = $_GET['writer'];
 
+            //如果是博主，可以添加文章
+            if ($_COOKIE['uid'] && $_COOKIE['uid'] == $writer) {
                 echo "
-                        <button type=\"button\" class=\"btn btn-success\">添加文章</button>
+                       <button type=\"button\" class=\"btn btn-success\" onclick=\"window.location.href='add.php'\">添加文章</button>
                     ";
-
             }
-
-
             ?>
-
-
-
-
-
-
-
 
 
             <!--左侧第二部分-->
@@ -145,11 +137,13 @@
                 <span class="blue_title">To Creative <b>IDEA</b></span>
             </div>
 
+            <!--            分割线-->
             <div class="templaemo_h_line"></div>
 
+            <!--文章的主题显示部分--------------------------------------------------------->
 
             <?php
-            //多次使用
+
             include "connect.php";
             if (isset($_GET['search'])) {
                 //如果有待搜索的文字
@@ -161,11 +155,32 @@
                 $w = 1;
                 //    select * from blog where 1 也是显示全部
             }
+
+            //$writer的默认值是当前用户的uid
+            $writer = $_COOKIE['uid'];
+
+            //主页跳转过来的(游客或会员或博主)
+            if ($_GET['writer']) {
+
+                $writer = $_GET['writer'];
+
+            }
+
+
+            /*
+             *
+             * 游客：查询传递来的id值作者的文章
+             * 会员：查询传递来的id值作者的文章
+             * 博主：
+             * */
+
+
             //排序：asc正序  desc倒序
-            $sql = "select * from blog where $w order by bid desc";
+            $sql = "select * from blog where  writer = $writer  and $w order by bid desc";
 
             //直接查询返回结果是resource，需要转换成array类型才能正常显示
             $query = mysqli_query($link, $sql); //查询结果返回resource类型
+
 
             //开始读取，逐行读取，指针下移
             while ($arr = mysqli_fetch_array($query)) {
@@ -180,11 +195,9 @@
                     </a>
                     <?php
 
-                    if (isset($_COOKIE['uid'])) {
-
-
-                        echo "
-                            
+                    //当前用户的id和调转页面的id相同时（说明是博主）
+                    if ($_COOKIE['uid'] == $writer) {
+                        echo " 
                             |
                             <a href=\"del.php?bid= " . $arr['bid'] . "\" style=\"text-decoration: none\">
                                 删除
@@ -193,20 +206,15 @@
                             <a href=\"edit.php?bid= " . $arr['bid'] . "\" style=\"text-decoration: none\">
                                 修改
                             </a>
-                            
                             ";
-
                     }
-
                     ?>
-
-
                 </h4>
-                <div class="green">
+                <div>
                     <!--内容-->
                     <p>
                         <!--iconv_substr（）是一个可以可以切割中文的函数（要切的对象，从哪开始，切几个）-->
-                        <?php echo iconv_substr($arr['content'], 0, 4) ?>...
+                        <?php echo iconv_substr($arr['content'], 0, 15) ?>...
 
                     </p>
                     <span style="list-style: none">
@@ -216,9 +224,10 @@
                 </span>
                 </div>
 
+                <div class="templaemo_h_line" style="margin-top: 10px;"></div>
 
                 <?php
-            }
+            }//whlie
             ?>
 
 

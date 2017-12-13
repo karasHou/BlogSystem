@@ -45,7 +45,7 @@
             <ul class="nav navbar-nav">
                 <p class="navbar-text">欢迎~</p>
                 <li class="active"><a href="#">主页</a></li>
-                <li><a href="personal.php">我的博客空间</a></li>
+                <li><a href="personal.php?writer=<?php echo "$_COOKIE[uid]" ?>">我的博客空间</a></li>
                 <li class="dropdown">
                 </li>
             </ul>
@@ -61,7 +61,7 @@
                             已登录 
                             </span >
                          </p>";
-                    echo "<li><a href='ulogin.php'><strong>注销</strong></a></li>";
+                    echo "<li><a href='ulogin.php?page=1'><strong>注销</strong></a></li>";
                 } else {
 //                    这里标明index页面为 1
                     echo "<li><a href='login.php?page=1'><span class=\"alert alert-info\" role=\"alert\" style='padding: 10px'>未登录</span></a></li>";
@@ -106,16 +106,16 @@
             <div id="header-xs-menu" class="navbar-collapse collapse">
                 <ul class="nav navbar-nav header-xs-nav">
                     <li class="active"><a
-                                href="http://www.17sucai.com/preview/512263/2016-04-05/%E5%BC%82%E6%B8%85%E8%BD%A9%E5%8D%9A%E5%AE%A28/index.html"><span
+                                href="#"><span
                                     class="glyphicon glyphicon-home"></span>网站首页</a></li>
                     <li><a href=""><span class="glyphicon glyphicon-erase"></span>网站前端</a></li>
                     <li><a href=""><span class="glyphicon glyphicon-inbox"></span>后端技术</a></li>
                     <li><a href=""><span class="glyphicon glyphicon-globe"></span>管理系统</a></li>
                     <li>
-                        <a href="http://www.17sucai.com/preview/512263/2016-04-05/%E5%BC%82%E6%B8%85%E8%BD%A9%E5%8D%9A%E5%AE%A28/about.html"><span
+                        <a href="#"><span
                                     class="glyphicon glyphicon-user"></span>关于我们</a></li>
                     <li>
-                        <a href="http://www.17sucai.com/preview/512263/2016-04-05/%E5%BC%82%E6%B8%85%E8%BD%A9%E5%8D%9A%E5%AE%A28/friendly.html"><span
+                        <a href="#"><span
                                     class="glyphicon glyphicon-tags"></span>友情链接</a></li>
                 </ul>
                 <form class="navbar-form"
@@ -153,13 +153,29 @@
                         //    select * from blog where 1 也是显示全部
                     }
                     //排序：asc正序  desc倒序
-                    $sql = "select * from blog where $w order by bid desc";
+                    $sql = "select * from blog where $w order by time desc";
+
+
+
 
                     //直接查询返回结果是resource，需要转换成array类型才能正常显示
                     $query = mysqli_query($link, $sql); //查询结果返回resource类型
 
+
                     //开始读取，逐行读取，指针下移
                     while ($arr = mysqli_fetch_array($query)) {
+
+
+                        $writer = $arr['writer'];
+
+                        $sql_writer = "select u.uname from  blog b,user u where $writer = u.uid ";
+
+                        $query_writer = mysqli_query($link, $sql_writer);
+
+
+                        if ($query_writer)
+                            $arr_writer = mysqli_fetch_array($query_writer);
+
                         ?>
 
                         <div class="news-list">
@@ -181,8 +197,9 @@
                                     </dt>
                                     <dd>
                                     <span class="name">
-                                        <a href="all.php?writer=<?php echo $arr['writer'] ?>">
-                                            <?php echo $arr['writer'] ?>
+
+                                        <a href="personal.php?writer=<?php echo $arr['writer'] ?>">
+                                            <?php echo $arr_writer['uname'] ?>
                                         </a>
                                     </span>
                                         <span class="identity"></span>

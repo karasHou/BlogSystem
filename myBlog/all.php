@@ -59,7 +59,7 @@
                             已登录
                             </span >
                             </p>";
-                                echo "<li><a href='ulogin.php'><strong>注销</strong></a></li>";
+                                echo "<li><a href='ulogin.php?page=3'><strong>注销</strong></a></li>";
                             } else {
                                 //                    这里标明all界面的page值为3
                                 echo "<li><a href='login.php?page=3'><span class=\"alert alert-info\" role=\"alert\" style='padding: 10px'>未登录</span></a></li>";
@@ -73,8 +73,15 @@
             </nav>
 
             <div class="row" style="margin-top: 50px;">
-                <div class="col-md-3" style="background: #ff00ff;height: 1000px;">123</div>
-                <div class="col-md-9" style="background: #00ff00;height: 1000px;">123</div>
+                <div class="col-md-3" style="background: #ff00ff;height: 1000px;">侧边</div>
+                <div class="col-md-9" style="background: #00ff00;height: 1000px;">
+
+                    <h3>
+
+                    </h3>
+
+
+                </div>
 
             </div>
 
