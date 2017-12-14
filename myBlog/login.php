@@ -6,15 +6,14 @@ if (isset($_GET['page'])) {
 
     //将当期转来的页面写入cookie
     setcookie('page', $_GET['page']);
-
+    $page = $_GET['page'];
 }
 
 if (isset($_POST['sub'])) {
 
-    echo "post";
-
     $uname = $_POST['uname'];
     $pass = $_POST['pass'];
+    $page = $_POST['hid'];
 
     $sql = "select * from user where uname = '$uname' and pass = '$pass'";
 
@@ -32,16 +31,22 @@ if (isset($_POST['sub'])) {
 
 
         //从cookie取出当前页面的page值
-        $page = $_COOKIE['page'];
+
 
 
         //如果包含1，说明是index界面调用的login
         if ($page == 1) {
-            header("location:index.php");
+
+            echo "<script>location = 'index.php'</script>";
+//            header("location:index.php");
         } else if ($page == 2) {
-            header("location:personal.php");
+            echo "<script>location = 'personal.php'</script>";
+
+//            header("location:personal.php");
         } else if ($page == 3) {
-            header("location:all.php");
+            echo "<script>location = 'all.php'</script>";
+
+//            header("location:all.php");
         }
 
 
@@ -89,7 +94,7 @@ if (isset($_POST['sub'])) {
             <input type="password" name="pass" class="password" placeholder="Password" oncontextmenu="return false"
                    onpaste="return false"/>
         </div>
-
+        <input type="hidden" name="hid" value="<?php echo $page; ?>">
         <input type="submit" name="sub" value="登录" id="submit" style="background: #ef4300;cursor: pointer">
         <button type="button" onclick="window.location.href='reg.php'" style="width: 270px;height: 42px;color: #212d25">
             注册

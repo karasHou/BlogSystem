@@ -122,7 +122,52 @@ if (isset($_GET['bid'])) {
             <div class="row" style="margin-top: 70px;height: 100%">
                 <div class="col-md-3" style="margin-top: 20px;background-color: #e3e5b3;border-radius: 10px">
 
-                    <h4>评论</h4>
+                    <h4 style="text-align: center">热门评论</h4>
+                    <!--                    输出文章的前三条评论-->
+
+                    <?php
+
+                    $sql = "select * from comment where article_id = '$bid' order by post_date desc limit 3";
+
+                    $query = mysqli_query($link, $sql);
+
+                    while ($arr_c = mysqli_fetch_array($query)) {
+
+
+                        $writer = $arr_c['user_id'];
+
+                        $sql_writer = "select u.uname from  blog b,user u where $writer = u.uid ";
+
+                        $query_writer = mysqli_query($link, $sql_writer);
+
+
+                        if ($query_writer)
+                            $arr_writer = mysqli_fetch_array($query_writer);
+
+                        ?>
+
+                        <div style="border: 1px solid #080808;margin: 10px;border-radius: 10px;padding: 5px">
+                            <p style="-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;padding: 10px;margin: 10px;"><?php echo $arr_c['content'] ?></p>
+
+                            <span style="color:#6a6a6a;  font-size: 13px;padding: 10px;margin: 10px;"><?php echo $arr_writer['uname'] ?></span>
+                            <br/>
+                            <span style="color:#6a6a6a;font-size: 13px;padding: 10px;margin: 10px;"><?php echo $arr_c['post_date'] ?></span>
+
+                        </div>
+
+
+                        <?php
+                    }
+                    ?>
+
+
+                    <form action="add_comment.php" method="post">
+                        <input type="hidden" name="hid" value="<?php echo $bid; ?>">
+                        <input type="text" name="content" style="height: 30px;margin-left: 10px">
+                        <input type="submit" value="添加评论" name="sub"
+                               style="width: 100px;height: 30px;color: #ffffff;margin: 10px;-webkit-border-radius: 10px;-moz-border-radius: 10px;border-radius: 10px;border: none;background: #95b6ff;">
+
+                    </form>
 
 
                 </div>

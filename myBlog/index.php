@@ -156,7 +156,6 @@
 
 
 
-
                     //直接查询返回结果是resource，需要转换成array类型才能正常显示
                     $query = mysqli_query($link, $sql); //查询结果返回resource类型
 
