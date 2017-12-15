@@ -128,15 +128,43 @@ if (!$_COOKIE['uid']) {
 
             <!--左侧第二部分-->
             <div class="templatemo_section_2">
-                <div class="blue">
-                    <h3>22 November 2024</h3>
-                    <p>Proin vel libero id erat venen atis accu msan. Nunc blan dit orci sit amet risus.</p>
-                </div>
+                <h4 class="text-center" style="margin: 5px;color: #ee444e ">热门评论</h4>
 
-                <div class="yellow">
-                    <h3>30 October 2024</h3>
-                    <p>Duis pul vinar scele risque ante. Mor bit risti que, risus quis congue pul vinar.</p>
-                </div>
+                <?php
+
+                include "connect.php";
+
+
+                $sql_c = "select * from comment where user_id = '$uid' order by post_date desc";
+
+                $query_c = mysqli_query($link, $sql_c);
+
+                while ($arr_c = mysqli_fetch_array($query_c)) {
+
+                    $article = $arr_c['article_id'];
+
+                    $sql_article = "select b.title from  blog b,comment c where $article = b.bid ";
+
+                    $query_article = mysqli_query($link, $sql_article);
+
+                    if ($query_article)
+                        $arr_article = mysqli_fetch_array($query_article);
+
+
+                    ?>
+
+                    <div class="blue">
+                        <h5>《<?php echo $arr_article['title']; ?>》</h5>
+                        <p><?php echo $arr_c['content']; ?></p>
+                        <span><?php echo $arr_c['post_date']; ?></span>
+                    </div>
+
+
+                    <?php
+                }
+                ?>
+
+
             </div>
 
 

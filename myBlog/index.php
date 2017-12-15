@@ -12,6 +12,7 @@
     <!--<link href="css/bootstrap.min.css" type="text/css" rel="stylesheet">-->
     <link href="css/style1.css" type="text/css" rel="stylesheet">
     <link type="text/css" href="css/nprogress.css" rel="stylesheet">
+
     <!--[if lt IE 9]>
     <script src="js/html5shiv.min.js" type="text/javascript"></script>
     <script src="js/respond.min.js" type="text/javascript"></script>
@@ -79,22 +80,20 @@
 
 <section class="container user-select">
     <header style="top: 50px">
+
+        <!--        ----------------------------------------------------------------------------------->
         <div class="hidden-xs header" style="margin-top: 150px;"><!--超小屏幕不显示-->
             <ul class="nav hidden-xs-nav">
-                <li class="active"><a
-                            href="http://www.17sucai.com/preview/512263/2016-04-05/%E5%BC%82%E6%B8%85%E8%BD%A9%E5%8D%9A%E5%AE%A28/index.html"><span
-                                class="glyphicon glyphicon-home"></span>网站首页</a></li>
-                <li><a href=""><span class="glyphicon glyphicon-erase"></span>网站前端</a></li>
-                <li><a href=""><span class="glyphicon glyphicon-inbox"></span>后端技术</a></li>
-                <li><a href=""><span class="glyphicon glyphicon-globe"></span>管理系统</a></li>
                 <li>
-                    <a href="http://www.17sucai.com/preview/512263/2016-04-05/%E5%BC%82%E6%B8%85%E8%BD%A9%E5%8D%9A%E5%AE%A28/about.html"><span
-                                class="glyphicon glyphicon-user"></span>关于我们</a></li>
-                <li>
-                    <a href="http://www.17sucai.com/preview/512263/2016-04-05/%E5%BC%82%E6%B8%85%E8%BD%A9%E5%8D%9A%E5%AE%A28/friendly.html"><span
-                                class="glyphicon glyphicon-tags"></span>友情链接</a></li>
+                    <div class="jq22-content">
+                        <canvas id="clock1_" width="200px" height="200px">
+                        </canvas>
+                    </div>
+                </li>
             </ul>
         </div>
+
+
         <!--/超小屏幕不显示-->
         <div class="visible-xs header-xs"><!--超小屏幕可见-->
             <div class="navbar-header header-xs-logo">
@@ -295,6 +294,7 @@
 <script src="js/jquery-2.1.4.min.js" type="text/javascript"></script>
 <script src="js/nprogress.js" type="text/javascript"></script>
 <script src="js/bootstrap.min.js" type="text/javascript"></script>
+<script src="js/canvas_clock.js"></script>
 <script>
     //页面加载
     $('body').show();
@@ -306,6 +306,26 @@
     }, 1000);
     //返回顶部按钮
     $(function () {
+
+
+        clockd1_ = {
+            "indicate": true,
+            "indicate_color": "#222",
+            "dial1_color": "#666600",
+            "dial2_color": "#81812e",
+            "dial3_color": "#9d9d5c",
+            "time_add": 1,
+            "time_24h": true,
+            "date_add": 3,
+            "date_add_color": "#999",
+        };
+
+        var c = document.getElementById('clock1_');
+        cns1_ = c.getContext('2d');
+
+        clock_conti(200, cns1_, clockd1_);
+
+
         $(window).scroll(function () {
             if ($(window).scrollTop() > 100) {
                 $(".gotop").fadeIn();

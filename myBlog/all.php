@@ -127,7 +127,7 @@ if (isset($_GET['bid'])) {
 
                     <?php
 
-                    $sql = "select * from comment where article_id = '$bid' order by post_date desc limit 3";
+                    $sql = "select * from comment where article_id = '$bid' order by post_date desc";
 
                     $query = mysqli_query($link, $sql);
 

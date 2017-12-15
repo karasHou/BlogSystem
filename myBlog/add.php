@@ -101,7 +101,7 @@ if (!empty($_POST['content1'])) {
             <br/>
             <input type="submit" name="button" value="提交内容"
                    style="color: #212d25;background: #c9fab9;border: none;border-radius: 5px;"/> (快捷键: Ctrl + Enter)
-            <button type="button" onclick="window.location.href='personal.php'"
+            <button type="button" onclick="window.location.href='personal.php?writer=<?php echo $uid; ?>'"
                     style="color: #212d25;border: none;border-radius: 5px;background: #c4ddff;">
                 返回
             </button>

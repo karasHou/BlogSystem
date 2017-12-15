@@ -92,7 +92,6 @@ body, input, button, textarea, select {
     overflow: hidden;
     height: 124px;
     line-height: 300px;
-    background: #3399CC url(../images/logo.png) no-repeat 50% 50%;
 }
 
 .header .logo a {
@@ -114,7 +113,6 @@ body, input, button, textarea, select {
 .hidden-xs-nav, .header-xs-nav {
     color: #444;
     font-size: 16px;
-    border-bottom: #E4E4E4 solid 1px;
 }
 
 .hidden-xs-nav span, .header-xs-nav span {
@@ -133,7 +131,6 @@ body, input, button, textarea, select {
     color: #FFFFFF;
     font-size: 26px;
     font-weight: 100;
-    background: #3399CC url(../images/logo.png) no-repeat 50% 50%;
 }
 
 .header-xs-logo .navbar-toggle {
@@ -465,7 +462,6 @@ body, input, button, textarea, select {
     padding-left: 18px;
     padding-right: 4px;
     height: 20px;
-    background: url(../images/news-icon.png) no-repeat left 3px;
 }
 
 .news-info .name a {
@@ -483,7 +479,6 @@ body, input, button, textarea, select {
     float: left;
     padding-left: 18px;
     color: #b8b8b8;
-    background: url(../images/news-icon.png) no-repeat left -28px;
 }
 
 .news-info .text {
