@@ -3,7 +3,8 @@
 //未登录，跳转至登录界面
 if (!$_COOKIE['uid']) {
 
-    header("location:login.php");
+    echo "<script>alert('清先登陆!')</script>";
+    echo "<script>location='login.php';</script>";
 
 }
 
@@ -36,9 +37,27 @@ if (!$_COOKIE['uid']) {
     <div id="templatemo_header">
         <div id="templatemo_logo_area">
             <div id="templatemo_logo">
-                Welcome!
-            </div>
+                <?php
+                include "connect.php";
 
+                $writer = $_GET['writer'];
+
+                $sql_w = "select uname from user where uid = '$writer'";
+
+                $query_w = mysqli_query($link, $sql_w);
+
+                if ($query_w) {
+
+                    $arr_w = mysqli_fetch_array($query_w);
+
+                    $uname = $arr_w['uname'];
+
+                    echo "$uname";
+
+                }
+                ?>
+
+            </div>
         </div>
 
         <div id="templatemo_social">
@@ -88,10 +107,6 @@ if (!$_COOKIE['uid']) {
             <div class="templatemo_section_1">
                 <div class="middle">
                     <div class="bottom">
-                        <p><?php
-                            if (isset($_COOKIE['mood']))
-                                echo "" . $_COOKIE['mood'] . "";
-                            ?></p>
                     </div>
                 </div>
             </div>
@@ -112,8 +127,6 @@ if (!$_COOKIE['uid']) {
 
             <?php
 
-            $writer = $_GET['writer'];
-
             //如果是博主，可以添加文章
             if ($_COOKIE['uid'] && $_COOKIE['uid'] == $writer) {
                 //保存用户uid
@@ -132,10 +145,10 @@ if (!$_COOKIE['uid']) {
 
                 <?php
 
-                include "connect.php";
 
+                $uid = $_GET['writer'];
 
-                $sql_c = "select * from comment where user_id = '$uid' order by post_date desc";
+                $sql_c = "select * from comment where holder_id = '$uid' order by post_date desc";
 
                 $query_c = mysqli_query($link, $sql_c);
 
@@ -185,7 +198,6 @@ if (!$_COOKIE['uid']) {
 
             <?php
 
-            include "connect.php";
             if (isset($_GET['search'])) {
                 //如果有待搜索的文字
                 $like = $_GET['search'];
@@ -206,14 +218,6 @@ if (!$_COOKIE['uid']) {
                 $writer = $_GET['writer'];
 
             }
-
-
-            /*
-             *
-             * 游客：查询传递来的id值作者的文章
-             * 会员：查询传递来的id值作者的文章
-             * 博主：
-             * */
 
 
             //排序：asc正序  desc倒序

@@ -17,12 +17,14 @@ if (isset($_GET['bid'])) {
     $query = mysqli_query($link, $sql);
     if ($query) {
 
-        echo "<script>location='personal.php'</script>";
+        $uid = $_COOKIE['uid'];
+
+        echo "<script>location='personal.php?writer=$uid'</script>";
+        echo "<script>alert('删除成功！')</script>";
 
 
     } else {
-
-        echo "删除失败";
+        echo "<script>alert('删除失败!请稍后重试或联系管理员')</script>";
 
     }
 

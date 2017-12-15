@@ -27,8 +27,9 @@ if (!empty($_POST['content1'])) {
     //查询语句有返回值
     if ($query) {
         //查询成功,跳转(或使用head也可以)
-        echo "<script>alert('插入成功')</script>";
-        header("location:personal.php");
+        echo "<script>alert('添加成功')</script>";
+        echo "<script>location = 'personal.php';</script>";
+
     } else {
         echo "<script>alert('插入失败')</script>";
     }

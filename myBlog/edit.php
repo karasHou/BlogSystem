@@ -46,8 +46,10 @@ if (isset($_POST['sub'])) {
 
     if ($query) {
 
+        $uid = $_COOKIE['uid'];
         //header方式跳转页面
-        header("location:personal.php");
+        echo "<script>location = 'personal.php?writer=$uid';</script>";
+        echo "<script>alert('编辑成功！');</script>";
 
     }
 

@@ -47,13 +47,19 @@ if (isset($_POST['sub'])) {
             echo "<script>location = 'all.php'</script>";
 
 //            header("location:all.php");
+        } else {
+            //如果都没匹配到跳转至主页
+            echo "<script>location = 'index.php'</script>";
+
         }
+
+        echo "<script>alert('登录成功')</script>";
 
 
     } else {
 //        登录不成功，需要重新登录
         echo "<script>alert('该用户不存在,请重新登录!')</script>";
-
+//        header('location:')
     }
 
 //        cookie：文件存储在本地的文件中，不能跨域 还要存一个session id

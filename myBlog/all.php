@@ -162,6 +162,7 @@ if (isset($_GET['bid'])) {
                     ?>
 
 
+                    <!--                    添加评论：post-->
                     <form action="add_comment.php" method="post">
                         <input type="hidden" name="hid" value="<?php echo $bid; ?>">
                         <input type="text" name="content" style="height: 30px;margin-left: 10px">
@@ -179,7 +180,10 @@ if (isset($_GET['bid'])) {
                     <div class="leader" style="font-weight: bolder">
                         <span>时间：<?php echo $arr['time'] ?></span>&nbsp;
                         <span>访问量：<?php echo $arr['hits'] ?></span>&nbsp;
-                        <span>作者：<?php echo $arr_w['uname'] ?></span>&nbsp;
+                        <span>
+                            作者：
+                            <a href="personal.php?writer=<?php echo $arr['writer'] ?>"><?php echo $arr_w['uname'] ?></a>
+                        </span>&nbsp;
                     </div>
 
                     <hr style="border: 0.5px solid #484848;"/>
