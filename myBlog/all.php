@@ -146,13 +146,14 @@ if (isset($_GET['bid'])) {
 
                         ?>
 
-                        <div style="border: 1px solid #080808;margin: 10px;border-radius: 10px;padding: 5px">
+                        <div style="position: relative;border: 1px solid #080808;margin: 10px;border-radius: 10px;padding: 5px">
                             <p style="-webkit-border-radius: 6px;-moz-border-radius: 6px;border-radius: 6px;padding: 10px;margin: 10px;"><?php echo $arr_c['content'] ?></p>
 
                             <span style="color:#6a6a6a;  font-size: 13px;padding: 10px;margin: 10px;"><?php echo $arr_writer['uname'] ?></span>
                             <br/>
                             <span style="color:#6a6a6a;font-size: 13px;padding: 10px;margin: 10px;"><?php echo $arr_c['post_date'] ?></span>
-
+                            <span style="position: absolute;bottom: 0;right: 0;padding: 5px 6px;"><a
+                                        href="del_comment.php?com_id=<?php echo $arr_c['com_id']; ?>"><?php if ($_COOKIE['uid'] && $_COOKIE['uid'] == $arr['writer']) echo "删除"; ?></a></span>
                         </div>
 
 
