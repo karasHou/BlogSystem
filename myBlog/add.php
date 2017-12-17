@@ -26,10 +26,10 @@ if (!empty($_POST['content1'])) {
     $query = mysqli_query($link, $sql);
     //查询语句有返回值
     if ($query) {
+        $writer = $_COOKIE['uid'];
         //查询成功,跳转(或使用head也可以)
         echo "<script>alert('添加成功')</script>";
-        echo "<script>location = 'personal.php';</script>";
-
+        echo "<script>location = " . "'personal.php?writer=$writer'" . ";</script>";
     } else {
         echo "<script>alert('插入失败')</script>";
     }

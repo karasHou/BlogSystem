@@ -1,5 +1,3 @@
-<!--删除指定id的文章的页面-->
-
 <?php
 
 //连接mysql数据库
@@ -14,9 +12,11 @@ if (isset($_GET['bid'])) {
     //单双嵌套以最外层为准
     $sql = "delete from blog where bid = '$bid'";
 
+//    echo $sql;
+//    die();
+
     $query = mysqli_query($link, $sql);
     if ($query) {
-
 
         //删除文章的相关评论
         $sql_c = "delete from comment where article_id = '$bid'";
@@ -24,16 +24,15 @@ if (isset($_GET['bid'])) {
 
         if ($query_c) {
             $uid = $_COOKIE['uid'];
-            echo "<script>location='personal.php?writer=$uid'</script>";
+            echo "<script>location='Article.php'</script>";
             echo "<script>alert('删除成功！')</script>";
-
         } else {
 
             echo "<script>alert('删除失败!请稍后重试或联系管理员')</script>";
 
         }
     } else {
-        echo "<script>alert('删除失败!请稍后重试或联系管理员')</script>";
+        echo "<script>alert('删除失败!')</script>";
 
     }
 

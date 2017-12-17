@@ -113,16 +113,6 @@ if (!$_COOKIE['uid']) {
 
             <div class="templaemo_h_line"></div>
 
-            <!--            <div class="btn-group">-->
-            <!--                <button class="btn btn-default btn-lg dropdown-toggle" type="button" data-toggle="dropdown"-->
-            <!--                        aria-haspopup="true" aria-expanded="false">-->
-            <!--                    文章分类-->
-            <!--                    <span class="caret"></span>-->
-            <!--                </button>-->
-            <!--                <ul class="dropdown-menu">-->
-            <!--                    <li><a href="#" style="text-decoration: none">Action</a></li>-->
-            <!--                </ul>-->
-            <!--            </div>-->
 
 
             <?php
