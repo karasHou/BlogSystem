@@ -4,7 +4,7 @@ include "connect.php";
 
 if (isset($_GET['page'])) {
 
-    //将当期转来的页面写入cookie
+    //将当前转来的页面写入cookie
     setcookie('page', $_GET['page']);
     $page = $_GET['page'];
 }
@@ -13,6 +13,9 @@ if (isset($_POST['sub'])) {
 
     $uname = $_POST['uname'];
     $pass = $_POST['pass'];
+
+    $pass = md5($pass);
+
     $page = $_POST['hid'];
 
     $sql = "select * from user where uname = '$uname' and pass = '$pass'";

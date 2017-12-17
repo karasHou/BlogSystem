@@ -6,6 +6,10 @@ if (isset($_POST['sub'])) {
 
     $uname = $_POST['uname'];
     $pass = $_POST['pass'];
+
+    //使用md5加密密码
+    $pass = md5($pass);
+
     $mood = $_POST['mood'];
 
     //检测重名
