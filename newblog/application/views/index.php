@@ -18,10 +18,6 @@
             font-family: Verdana, sans-serif, 宋体;
         }
 
-        body {
-
-            background: url('assets/images/bg.jpg');
-        }
     </style>
 </head>
 <body>
@@ -37,7 +33,21 @@
 <![endif]-->
 <div id="OSC_Screen"><!-- #BeginLibraryItem "/Library/OSC_Banner.lbi" -->
     <div id="OSC_Banner">
-        <div id="OSC_Slogon">Johnny's Blog</div>
+        <div id="OSC_Slogon">
+            <?php
+            $user = $this->session->userdata('user');
+
+            if (isset($user)) {
+                echo $user->username;
+            } else {
+                echo "我";
+            }
+
+            ?>
+
+
+            'Blog
+        </div>
         <div id="OSC_Channels">
             <ul>
                 <li><a href="#" class="project">心情 here...</a></li>
@@ -48,7 +58,21 @@
     <div id="OSC_Topbar">
         <div id="VisitorInfo">
             当前访客身份：
-            游客 [ <a href="User/login">登录</a> | <a href="User/reg">注册</a> ]
+
+            <?php
+
+            if (isset($user)) {
+                echo $user->username;
+                echo "<a href=\"User/exit_login\">[退出]</a> ";
+            } else {
+                echo "游客 <a href=\"User/login\">登录</a> | <a href=\"User/reg\">注册</a>";
+            }
+
+            ?>
+
+
+
+
             <span id="OSC_Notification">
 			<a href="inbox.htm" class="msgbox" title="进入我的留言箱">你有<em>0</em>新留言</a>
 					</span>
@@ -70,7 +94,12 @@
                                                              title="Johnny" class="SmallPortrait" user="154693"
                                                              align="absmiddle"></a></div>
             <div id="lnks">
-                <strong>Johnny的博客</strong>
+                <strong><?php
+                    if (isset($user)) {
+                        echo $user->username;
+                    } else {
+                        echo "我";
+                    } ?>的博客</strong>
                 <div>
                     <a href="#">TA的博客列表</a>&nbsp;|
                     <a href="sendMsg.htm">发送留言</a>
@@ -81,53 +110,36 @@
         </div>
         <div class="BlogList">
             <ul>
-                <li class='Blog' id='blog_24027'>
+                <?php
+                if (isset($list))
+                    foreach ($list as $article) {
+                        ?>
+                        <li class='Blog' id='blog_24027'>
 
-                    <h2 class='BlogAccess_true BlogTop_0'><a href="viewPost_comment.htm">测试文章3</a></h2>
+                            <h2 class='BlogAccess_true BlogTop_0'><a
+                                        href="viewPost_comment.htm"><?php echo $article->title ?></a></h2>
 
-                    <div class='outline'>
+                            <div class='outline'>
 
-                        <span class='time'>发表于 2011年06月18日 0:34</span>
+                                <span class='time'>发表于 <?php echo $article->post_date ?></span>
 
-                        <span class='catalog'>分类: <a href="?catalog=92334">工作日志</a></span>
+                                <span class='catalog'>分类: <a href="?catalog=92334"><?php echo $article->type_name ?></a></span>
 
-                        <span class='stat'>统计: 0评/0阅</span>
+                                <span class='stat'>统计: 0评/<?php echo $article->clicked ?>阅</span>
 
-                    </div>
+                            </div>
 
-                    <div class='TextContent' id='blog_content_24027'>
+                            <div class='TextContent' id='blog_content_24027'>
 
-                        测试文章3
+                                <?php echo $article->content ?>
 
-                        <div class='fullcontent'><a href="viewPost_comment.htm">阅读全文...</a></div>
+                                <div class='fullcontent'><a href="viewPost_comment.htm">阅读全文...</a></div>
 
-                    </div>
+                            </div>
 
-                </li>
-                <li class="Blog" id="blog_24026">
-                    <h2 class="BlogAccess_true BlogTop_0"><a href="viewPost_logined.htm">测试文章2</a></h2>
-                    <div class="outline">
-                        <span class="time">发表于 2011年06月17日 23:06</span>
-                        <span class="catalog">分类: <a href="#">工作日志</a></span>
-                        <span class="stat">统计: 0评/1阅</span>
-                    </div>
-                    <div class="TextContent" id="blog_content_24026">
-                        测试文章1
-                        <div class="fullcontent"><a href="viewPost.htm">阅读全文...</a></div>
-                    </div>
-                </li>
-                <li class="Blog" id="blog_24025">
-                    <h2 class="BlogAccess_true BlogTop_0"><a href="viewPost.htm">测试文章1</a></h2>
-                    <div class="outline">
-                        <span class="time">发表于 2011年06月17日 23:04</span>
-                        <span class="catalog">分类: <a href="#">工作日志</a></span>
-                        <span class="stat">统计: 0评/3阅</span>
-                    </div>
-                    <div class="TextContent" id="blog_content_24025">
-                        <b>测试文章1</b>
-                        <div class="fullcontent"><a href="viewPost.htm">阅读全文...</a></div>
-                    </div>
-                </li>
+                        </li>
+
+                    <?php } ?>
             </ul>
             <div class="clear"></div>
         </div>
@@ -135,9 +147,14 @@
             <div class="catalogs SpaceModule">
                 <strong>博客分类</strong>
                 <ul class="LinkLine">
-                    <li><a href="#">工作日志(2)</a></li>
-                    <li><a href="#">日常记录(0)</a></li>
-                    <li><a href="#">转贴的文章(0)</a></li>
+
+                    <?php
+                    if (isset($types))
+                        foreach ($types as $type) {
+                            ?>
+                            <li><a href="#"><?php echo $type->type_name . '(' . $type->num . ')' ?></a></li>
+                        <?php } ?>
+
                 </ul>
             </div>
             <div class="comments SpaceModule">

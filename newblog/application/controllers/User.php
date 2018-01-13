@@ -20,10 +20,12 @@ class User extends CI_Controller
      * @see https://codeigniter.com/user_guide/general/urls.html
      */
 
+    //构造函数
     public function __construct()
     {
         parent::__construct();
         $this->load->model("User_model");
+
     }
 
 
@@ -168,13 +170,21 @@ class User extends CI_Controller
         $email = $this->input->get('email');
         $pwd = $this->input->get('pwd');
 
-        $result = $this->User_model->check_email($email);
+        $result = $this->User_model->check_login($email);
 
         if (count($result) > 0) {
             //存在
-            if ($result->password == $pwd) {
+            if ($result[0]->password == $pwd) {
                 //密码正确
+
+
+                $this->session->set_userdata(array(
+                    "user" => $result[0]
+                ));
+
                 echo 'success';
+
+
             } else {
                 //密码错误
                 echo 'pwd-error';
@@ -190,5 +200,14 @@ class User extends CI_Controller
 
     }
 
+    //退出登录
+    public function exit_login()
+    {
+
+        $this->session->unset_userdata('user');
+        redirect("welcome/index");
+
+
+    }
 
 }

@@ -22,14 +22,14 @@ class User_model extends CI_Model
     {
 
         $query = $this->db->get_where('t_user', array('email' => $email));
-        return $query->row();
+        return $query->row();   //返回一行的查询结果
     }
 
     public function check_login($email)
     {
 
         $query = $this->db->get_where('t_user', array('email' => $email));
-        return $query->row();
+        return $query->result();
     }
 
 

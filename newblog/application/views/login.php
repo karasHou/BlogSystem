@@ -157,7 +157,14 @@
 
                     } else if (data == 'success') {
 
-                        window.location.href = 'User/index';
+                        window.location.href = 'Welcome/index';
+
+                    }
+
+
+                    else {
+
+                        alert(data);
 
                     }
                 });
