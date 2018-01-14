@@ -1,4 +1,4 @@
-Name：BlogSystem
+Name：《博客系统》（BlogSystem）
 ----------
 
 
@@ -24,6 +24,7 @@ Name：BlogSystem
 注册界面
 
 主页
+![主页](https://github.com/Houweix/BlogSystem/raw/master/myBlog/img/1.png)
 
 个人空间
 
