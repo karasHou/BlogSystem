@@ -1,6 +1,6 @@
 [![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]()
 
-## Name：《博客系统》（BlogSystem）
+## 《博客系统》（BlogSystem）
 
 
 [在线预览](http://www.ihouwei.com/myBlog)
