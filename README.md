@@ -21,26 +21,48 @@
 * phpStorm `2017.3.2`
 * Navicat Premium `10.0.11`
 
+## 设计
+
+### 基于键的数据模型
+![](https://github.com/Houweix/BlogSystem/raw/master/myBlog/img/key-model.png)
+
+### 系统用例模型
+![](https://github.com/Houweix/BlogSystem/raw/master/myBlog/img/model.png)
+
+### 物理数据库设计
+![](https://github.com/Houweix/BlogSystem/raw/master/myBlog/img/db.png)
+
+
 ## 界面 & 功能
 
 ### 主页
 >主页显示按时间倒序排列的最近的文章列表和按浏览量排序的热门推荐列表。在右上方的搜索功能可以按文章的关键字查询文章。导航栏右侧提供游客登录的入口。
+
 ![主页](https://github.com/Houweix/BlogSystem/raw/master/myBlog/img/1.png)
 
 ### 登录界面
 >用户输入用户名和密码后先前台校验用户名和密码的规范，然后提交至后台数据库校验正确，若正确登录；否则提示用户账号或密码错误。
+
 ![登录](https://github.com/Houweix/BlogSystem/raw/master/myBlog/img/2.png)
 
 ### 个人空间
 >个人空间界面主要由添加文章，显示博主文章的评论列表，显示博主所有文章列表的功能。如果登录用户是博主，则可以对文章进行删除和修改的功能。
+
 ![个人空间](https://github.com/Houweix/BlogSystem/raw/master/myBlog/img/5.png)
 
 ### 文章详情
 >文章详情界面左侧显示该文章的评论，如果是博主访问（已登录）该界面会显示删除评论的功能。同时在左侧下方会显示添加评论的输入框，如果未登录会提示先登录再添加评论。另外在右侧点击作者可以进入该作者的个人空间查看文章和热门评论。
+
 ![文章](https://github.com/Houweix/BlogSystem/raw/master/myBlog/img/3.png)
 
 ### 添加文章
 >添加文章部分分为添加文章标题和添加文章内容两部分。添加文章正文部分可以使用上方的工具栏添加加粗，高亮，段落等效果。输入完成后可以点击下方的“提交内容”按钮提交，也可以使用Ctrl + Enter快捷键提交。
+
 ![主页](https://github.com/Houweix/BlogSystem/raw/master/myBlog/img/4.png)
 
-### 关键技术
+### 遇到的问题 & 如何解决
+
+
+
+
+
