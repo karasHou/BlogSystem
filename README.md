@@ -20,9 +20,10 @@ Name：《博客系统》（BlogSystem）
 * phpStorm `2017.3.2`
 * Navicat Premium `10.0.11`
 
-### 界面展示
+### 界面 & 功能
 
 #### 主页
+    主页显示按时间倒序排列的最近的文章列表和按浏览量排序的热门推荐列表。在右上方的搜索功能可以按文章的关键字查询文章。导航栏右侧提供游客登录的入口。
 ![主页](https://github.com/Houweix/BlogSystem/raw/master/myBlog/img/1.png)
 
 #### 登录界面
