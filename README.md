@@ -9,9 +9,9 @@
 在线预览：www.ihouwei.com/myBlog
 
 系统说明：
------------
+----------
   本系统有两个版本，第一个版本（旧）采用原生php+mysql开发，结合html+css+js，辅以jQuery，bootstrap等框架构建页面。第二个版本是基于php的CodeIgniter框架，按照MVC模式开发。
-  
+  
 系统环境：
 ------------
 采用XAMPP集成环境
