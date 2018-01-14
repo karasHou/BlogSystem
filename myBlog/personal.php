@@ -1,7 +1,9 @@
 <?php
 
+session_start();
+
 //未登录，跳转至登录界面
-if (!$_COOKIE['uid']) {
+if (!$_SESSION['uid']) {
 
     echo "<script>alert('清先登陆!')</script>";
     echo "<script>location='login.php';</script>";
@@ -81,9 +83,9 @@ if (!$_COOKIE['uid']) {
                 <li><a href="#" class="current">daily</a></li>
 
                 <?php
-                if ($_COOKIE['uid']) {
+                if ($_SESSION['uid']) {
 
-                    echo "<li><a style='color: #ff1a22;font-weight: bolder'>" . $_COOKIE['uname'] . "已登录</a></li>";
+                    echo "<li><a style='color: #ff1a22;font-weight: bolder'>" . $_SESSION['uname'] . "已登录</a></li>";
                     echo "<li><a href='ulogin.php?page=1' style='font-weight: bolder'>注销</a></li>";
 
                 } else {
@@ -118,9 +120,9 @@ if (!$_COOKIE['uid']) {
             <?php
 
             //如果是博主，可以添加文章
-            if ($_COOKIE['uid'] && $_COOKIE['uid'] == $writer) {
+            if ($_SESSION['uid'] && $_SESSION['uid'] == $writer) {
                 //保存用户uid
-                $uid = $_COOKIE['uid'];
+                $uid = $_SESSION['uid'];
 
                 echo "
                        <button type=\"button\" class=\"btn btn-success\" onclick=\"window.location.href='add.php?uid=$uid'\">添加文章</button>
@@ -200,7 +202,7 @@ if (!$_COOKIE['uid']) {
             }
 
             //$writer的默认值是当前用户的uid
-            $writer = $_COOKIE['uid'];
+            $writer = $_SESSION['uid'];
 
             //主页跳转过来的(游客或会员或博主)
             if ($_GET['writer']) {
@@ -231,7 +233,7 @@ if (!$_COOKIE['uid']) {
                     <?php
 
                     //当前用户的id和调转页面的id相同时（说明是博主）
-                    if ($_COOKIE['uid'] == $writer) {
+                    if ($_SESSION['uid'] == $writer) {
                         echo " 
                             |
                             <a href=\"del.php?bid= " . $arr['bid'] . "\" style=\"text-decoration: none\">

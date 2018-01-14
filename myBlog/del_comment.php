@@ -2,7 +2,7 @@
 
 //连接mysql数据库
 include "connect.php";
-
+session_start();
 
 //如果获取到评论id
 if (isset($_GET['com_id'])) {

@@ -2,6 +2,8 @@
 
 include "connect.php";
 
+session_start();
+
 if (isset($_POST['sub'])) {
 
     $uname = $_POST['uname'];

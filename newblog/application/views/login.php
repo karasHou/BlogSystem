@@ -157,7 +157,7 @@
 
                     } else if (data == 'success') {
 
-                        window.location.href = 'Welcome/index';
+                        window.location.href = 'Welcome/index_logined';
 
                     }
 

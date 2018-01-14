@@ -1,11 +1,14 @@
 <?php
 
-if ($_COOKIE['uid']) {
+session_start();
 
-    //将uid和uname、mood置空
-    setcookie('uid', "");
-    setcookie('uname', "");
-    setcookie('mood', "");
+if ($_SESSION['uid']) {
+
+
+    unset($_SESSION['uid']);
+    unset($_SESSION['uname']);
+    unset($_SESSION['mood']);
+
 
     if (isset($_GET['page'])) {
 

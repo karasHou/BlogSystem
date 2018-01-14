@@ -1,10 +1,12 @@
 <?php
 include "connect.php";
 
-//注销后从cookie中读取bid值
-if (isset($_COOKIE['bid'])) {
+session_start();
 
-    $bid = $_COOKIE['bid'];
+//注销后从$_SESSION中读取bid值
+if (isset($_SESSION['bid'])) {
+
+    $bid = $_SESSION['bid'];
 
 }
 
@@ -12,7 +14,9 @@ if (isset($_COOKIE['bid'])) {
 if (isset($_GET['bid'])) {
     $bid = $_GET['bid'];
 
-    setcookie('bid', $_GET['bid']);
+    $_SESSION['bid'] = $bid;
+
+
 
 }
 
@@ -85,8 +89,8 @@ if (isset($_GET['bid'])) {
                             <li><a href="
                                 <?php
                                 $uid = "";
-                                if (isset($_COOKIE['uid'])) {
-                                    $uid = $_COOKIE['uid'];
+                                if (isset($_SESSION['uid'])) {
+                                    $uid = $_SESSION['uid'];
                                 }
                                     echo "personal.php?writer=$uid";
 
@@ -98,10 +102,10 @@ if (isset($_GET['bid'])) {
                         <ul class="nav navbar-nav navbar-right">
 
                             <?php
-                            //如果cookie中有值
-                            if ($_COOKIE['uid']) {
+                            //如果$_SESSION中有值
+                            if ($_SESSION['uid']) {
                                 echo
-                                    "<p class='navbar-text'>" . $_COOKIE['uname'] . "&nbsp;
+                                    "<p class='navbar-text'>" . $_SESSION['uname'] . "&nbsp;
                             <span class=\"alert alert-success\" role=\"alert\" style='padding: 8px'>
                             已登录
                             </span >
@@ -153,7 +157,7 @@ if (isset($_GET['bid'])) {
                             <br/>
                             <span style="color:#6a6a6a;font-size: 13px;padding: 10px;margin: 10px;"><?php echo $arr_c['post_date'] ?></span>
                             <span style="position: absolute;bottom: 0;right: 0;padding: 5px 6px;"><a
-                                        href="del_comment.php?com_id=<?php echo $arr_c['com_id']; ?>"><?php if ($_COOKIE['uid'] && $_COOKIE['uid'] == $arr['writer']) echo "删除"; ?></a></span>
+                                        href="del_comment.php?com_id=<?php echo $arr_c['com_id']; ?>"><?php if ($_SESSION['uid'] && $_SESSION['uid'] == $arr['writer']) echo "删除"; ?></a></span>
                         </div>
 
 

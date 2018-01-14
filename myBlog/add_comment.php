@@ -2,7 +2,9 @@
 
 <?php
 
-if (!$_COOKIE['uid']) {
+session_start();
+
+if (!$_SESSION['uid']) {
     //未登录，跳转至登录界面
     echo "<script>alert('请先登录！')</script>";
     echo "<script>location = 'login.php?page=3'</script>";
@@ -25,7 +27,7 @@ if (isset($_POST['sub'])) {
             $bid = $_POST['hid'];   //获取文章id
 
             //评论者id
-            $uid = $_COOKIE['uid'];
+            $uid = $_SESSION['uid'];
 
             //查询文章作者id(根据文章id)
             $sql_w = "select writer from blog where bid = '$bid'";

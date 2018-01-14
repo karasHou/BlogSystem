@@ -1,11 +1,16 @@
 <?php
 
+session_start();
+
 include "connect.php";
 
 if (isset($_GET['page'])) {
 
-    //将当前转来的页面写入cookie
-    setcookie('page', $_GET['page']);
+
+    $_SESSION['page'] = $_GET['page'];
+
+
+
     $page = $_GET['page'];
 }
 
@@ -27,13 +32,11 @@ if (isset($_POST['sub'])) {
 
     //查询到，可以登录
     if ($result) {
-        //cookie中写入值（可以多个）
-        setcookie('uid', $result['uid']);
-        setcookie('uname', $result['uname']);
-        setcookie('mood', $result['mood']);
+        $_SESSION['uid'] = $result['uid'];
+        $_SESSION['uname'] = $result['uname'];
+        $_SESSION['mood'] = $result['uid'];
 
 
-        //从cookie取出当前页面的page值
 
 
 

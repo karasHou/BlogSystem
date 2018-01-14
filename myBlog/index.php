@@ -1,3 +1,8 @@
+<?php
+session_start();
+?>
+
+
 <!DOCTYPE html>
 <html>
 <head>
@@ -46,7 +51,7 @@
             <ul class="nav navbar-nav">
                 <p class="navbar-text">欢迎~</p>
                 <li class="active"><a href="#">主页</a></li>
-                <li><a href="personal.php?writer=<?php echo "$_COOKIE[uid]" ?>">我的博客空间</a></li>
+                <li><a href="personal.php?writer=<?php echo "$_SESSION[uid]" ?>">我的博客空间</a></li>
                 <li class="dropdown">
                 </li>
             </ul>
@@ -55,9 +60,9 @@
 
                 <?php
                 //如果cookie中有值
-                if ($_COOKIE['uid']) {
+                if ($_SESSION['uid']) {
                     echo
-                        "<p class='navbar-text'>" . $_COOKIE['uname'] . "&nbsp;
+                        "<p class='navbar-text'>" . $_SESSION['uname'] . "&nbsp;
                             <span class=\"alert alert-success\" role=\"alert\" style='padding: 8px'>
                             已登录 
                             </span >
@@ -152,7 +157,6 @@
                     }
                     //排序：asc正序  desc倒序
                     $sql = "select * from blog where $w order by time desc";
-
 
 
                     //直接查询返回结果是resource，需要转换成array类型才能正常显示

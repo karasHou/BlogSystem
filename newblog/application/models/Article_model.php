@@ -8,7 +8,17 @@
  */
 class Article_model extends CI_Model
 {
-    public function get_article_list()
+
+    //获取文章行数
+    public function get_count_article($userid)
+    {
+        if ($userid)
+            $this->db->where('username', $userid->user_id);
+        return $this->db->count_all('t_article');
+    }
+
+    //获取文章列表项
+    public function get_article_list($page_size, $offset)
     {
 
 
@@ -16,9 +26,10 @@ class Article_model extends CI_Model
         $this->db->from('t_article a');
         //连接
         $this->db->join('t_article_type t', 'a.type_id = t.type_id', 'left');
+        //ci的limit和常规的limit参数位置相反,1.每页的数量 2.偏移量
+        $this->db->limit($page_size, $offset);
         $query = $this->db->get();
 
-//        $query = $this->db->query($sql);
         return $query->result();
     }
 

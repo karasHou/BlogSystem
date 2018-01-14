@@ -9,6 +9,8 @@
 //连接mysql数据库
 include "connect.php";
 
+session_start();
+
 //========处理get提交=========
 //如果获取到bid
 if (isset($_GET['bid'])) {
@@ -46,7 +48,7 @@ if (isset($_POST['sub'])) {
 
     if ($query) {
 
-        $uid = $_COOKIE['uid'];
+        $uid = $_SESSION['uid'];
         //header方式跳转页面
         echo "<script>location = 'personal.php?writer=$uid';</script>";
         echo "<script>alert('编辑成功！');</script>";

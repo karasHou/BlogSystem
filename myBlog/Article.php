@@ -85,6 +85,8 @@
 
                                 <?php
 
+                                session_start();
+
                                 include "connect.php";
 
                                 $sql = "select * from blog order by time desc";

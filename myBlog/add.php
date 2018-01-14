@@ -1,7 +1,10 @@
 <?php
-if (isset($_COOKIE['uid'])) {
+
+session_start();
+
+if (isset($_SESSION['uid'])) {
     //保存用户的uid值
-    $uid = $_COOKIE['uid'];
+    $uid = $_SESSION['uid'];
 }
 
 include "connect.php";
@@ -26,7 +29,7 @@ if (!empty($_POST['content1'])) {
     $query = mysqli_query($link, $sql);
     //查询语句有返回值
     if ($query) {
-        $writer = $_COOKIE['uid'];
+        $writer = $_SESSION['uid'];
         //查询成功,跳转(或使用head也可以)
         echo "<script>alert('添加成功')</script>";
         echo "<script>location = " . "'personal.php?writer=$writer'" . ";</script>";

@@ -28,7 +28,6 @@ class User extends CI_Controller
 
     }
 
-
     //主页
     public function index()
     {
@@ -38,11 +37,9 @@ class User extends CI_Controller
     //登录
     public function login()
     {
-        //登录前先检测session
 
         $this->load->view('login');
     }
-
 
     //产生验证码
     public function createCode()
@@ -141,7 +138,6 @@ class User extends CI_Controller
             echo "already";
         }
     }
-
 
     //校验验证码
     public function check_code()

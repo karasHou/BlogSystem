@@ -3,6 +3,7 @@
 //连接mysql数据库
 include "connect.php";
 
+session_start();
 
 //如果获取到bid
 if (isset($_GET['bid'])) {
@@ -23,7 +24,7 @@ if (isset($_GET['bid'])) {
         $query_c = mysqli_query($link, $sql_c);
 
         if ($query_c) {
-            $uid = $_COOKIE['uid'];
+            $uid = $_SESSION['uid'];
             echo "<script>location='Article.php'</script>";
             echo "<script>alert('删除成功！')</script>";
         } else {
