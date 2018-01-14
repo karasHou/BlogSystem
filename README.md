@@ -1,5 +1,6 @@
-Name：《博客系统》（BlogSystem）
-----------
+[![Travis](https://img.shields.io/travis/rust-lang/rust.svg)]()
+
+## Name：《博客系统》（BlogSystem）
 
 
 [在线预览](http://www.ihouwei.com/myBlog)
@@ -42,3 +43,4 @@ Name：《博客系统》（BlogSystem）
 >添加文章部分分为添加文章标题和添加文章内容两部分。添加文章正文部分可以使用上方的工具栏添加加粗，高亮，段落等效果。输入完成后可以点击下方的“提交内容”按钮提交，也可以使用Ctrl + Enter快捷键提交。
 ![主页](https://github.com/Houweix/BlogSystem/raw/master/myBlog/img/4.png)
 
+#### 关键技术
