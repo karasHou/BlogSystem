@@ -46,7 +46,7 @@
                 echo $user->username;
             }
 
-            ?>Blog
+            ?>'s Blog
         </div>
         <div id="OSC_Channels">
             <ul>
@@ -58,10 +58,15 @@
     <div id="OSC_Topbar">
         <div id="VisitorInfo">
             当前访客身份：
-            Johnny [ <a href="index.htm">退出</a> ]
-            <span id="OSC_Notification">
-			<a href="inbox.htm" class="msgbox" title="进入我的留言箱">你有<em>0</em>新留言</a>
-																				</span>
+            <?php
+
+
+            if (isset($user)) {
+                echo $user->username;
+            }
+
+            ?>[ <a href="User/exit_login">退出</a> ]
+
         </div>
         <div id="SearchBar">
             <form action="#">
@@ -81,7 +86,14 @@
                                                                  class="SmallPortrait" user="154693" align="absmiddle"></a>
             </div>
             <div id="lnks">
-                <strong>Johnny的博客</strong>
+                <strong><?php
+
+
+                    if (isset($user)) {
+                        echo $user->username;
+                    }
+
+                    ?>的博客</strong>
                 <div><a href="index_logined.htm">TA的博客列表</a>&nbsp;|
                     <a href="sendMsg.htm">发送留言</a></div>
             </div>

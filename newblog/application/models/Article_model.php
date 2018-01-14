@@ -48,4 +48,13 @@ class Article_model extends CI_Model
         return $query->result();
 
     }
+
+
+    public function publish_blog($article)
+    {
+        $this->db->insert('t_article', $article);
+        return $this->db->affected_rows();
+
+    }
+
 }

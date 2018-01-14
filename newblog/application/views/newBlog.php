@@ -8,6 +8,13 @@
     <title>
         <?php
 
+        $user = $this->session->userdata('user');
+
+        if (isset($user)) {
+            echo $user->username;
+        } else {
+            echo "我";
+        }
 
         ?>
 
@@ -51,7 +58,7 @@
             }
 
 
-            ?>Blog
+            ?>'s Blog
         </div>
         <div id="OSC_Channels">
             <ul>
@@ -117,7 +124,7 @@
             </div>
             <div id="AdminContent">
                 <div class="MainForm">
-                    <form id="BlogForm" action="/action/blog/save?user=${g_user.id}" method="POST">
+                    <form id="BlogForm" action="Article/insert_article" method="POST">
                         <input id="hdn_blog_id" name="draft" value="0" type="hidden">
                         <table>
                             <tbody>
@@ -129,14 +136,18 @@
                                     <input name="title" id="f_title" class="TEXT" style="width: 400px;" type="text">
                                     存放于
                                     <select name="catalog">
-                                        )
-                                        <option selected="selected" value="92334">工作日志</option>
-                                        )
-                                        <option value="92335">日常记录</option>
-                                        )
-                                        <option value="92336">转贴的文章</option>
-                                    </select>
-                                    <a href="blogCatalogs.htm" onclick="return confirm('是否放弃当前编辑进入分类管理？');">分类管理»</a>
+                                        <?php
+
+                                        if (isset($types))
+                                            foreach ($types as $type) {
+                                                echo " <option selected=\"selected\" value=\".$type->type_id.\">$type->type_name</option>";
+                                                echo $type->type_name;
+                                            } else echo '11111111111111111111';
+
+                                        ?>
+
+                                        <a href="blogCatalogs.htm"
+                                           onclick="return confirm('是否放弃当前编辑进入分类管理？');">分类管理»</a>
                                 </td>
                             </tr>
                             <tr>
@@ -151,43 +162,12 @@
                                 <td><textarea name="content" id="ta_blog_content"
                                               style="width:750px;height:300px;"></textarea></td>
                             </tr>
-                            <tr class="option">
-                                <td><strong>文章类型？</strong>
-                                    <input id="blog_type_1" name="type" value="1" onclick="switch_src(this)"
-                                           checked="checked" type="radio"> <label for="blog_type_1">原创&nbsp;</label>
-                                    <input id="blog_type_4" name="type" value="4" onclick="switch_src(this)"
-                                           type="radio"> <label for="blog_type_1">转贴&nbsp;</label>
-                                    <span id="f_origin_url" style="display:none">
-		<strong>原文链接: </strong><input id="t_origin_url" name="origin_url" class="TEXT" size="50" type="text">
-	</span>
-                                </td>
-                            </tr>
-                            <tr class="option">
-                                <td><strong>隐私设置？</strong>
-                                    <input id="privacy_1" name="privacy" value="0" checked="checked" type="radio">
-                                    <label for="privacy_1">所有人可见&nbsp;</label>
-                                    <input id="privacy_0" name="privacy" value="1" type="radio"> <label for="privacy_0">保密（只有本人可见）</label>
-                                    <span class="tip">设置为保密的文章，标题对任何人是可见的</span>
-                                </td>
-                            </tr>
-                            <tr class="option">
-                                <td><strong>评论设置？ </strong>
-                                    <input id="can_comment_1" name="deny_comment" value="0" checked="checked"
-                                           type="radio"> <label for="can_comment_1">允许评论&nbsp;</label>
-                                    <input id="can_comment_0" name="deny_comment" value="1" type="radio"> <label
-                                            for="can_comment_0">禁止评论</label>
-                                </td>
-                            </tr>
-                            <tr>
-                                <td>&nbsp;</td>
-                            </tr>
+
+
                             <tr class="submit">
                                 <td>
                                     <input value=" 发 表 " class="BUTTON SUBMIT" type="submit">
-                                    <input name="as_top" value="1" type="checkbox">
-                                    设置为置顶
-                                    <span id="ajax_processing" style="margin-left:10px;">正在提交，请稍候...</span>
-                                    <span id="submit_msg" style="display:none;"></span>
+
                                 </td>
                             </tr>
                             </tbody>
@@ -323,7 +303,7 @@
 
                             urlType: 'domain',
 
-                            cssPath: 'css/ke-oschina.css',
+                            cssPath: 'assets/css/ke-oschina.css',
 
                             imageUploadJson: '/action/blog/upload_img',
 
@@ -356,64 +336,6 @@
             $(document).ready(function () {
 
                 $('#AdminTitle').text('发表博客');
-
-            });
-
-            $('.AutoCommitForm').ajaxForm({
-
-                success: function (html) {
-
-                    $('#error_msg').hide();
-
-                    if (html.length > 0)
-
-                        $('#error_msg').html("<span class='error_msg'>" + html + "</span>");
-
-                    else
-
-                        $('#error_msg').html("<span class='ok_msg'>操作已成功完成</span>")
-
-                    $('#error_msg').show("fast");
-
-                }
-
-            });
-
-            $('.AutoCommitJSONForm').ajaxForm({
-
-                dataType: 'json',
-
-                success: function (json) {
-
-                    $('#error_msg').hide();
-
-                    if (json.error == 0) {
-
-                        if (json.msg)
-
-                            $('#error_msg').html("<span class='ok_msg'>" + json.msg + "</span>");
-
-                        else
-
-                            $('#error_msg').html("<span class='ok_msg'>操作已成功完成</span>");
-
-                    }
-
-                    else {
-
-                        if (json.msg)
-
-                            $('#error_msg').html("<span class='error_msg'>" + json.msg + "</span>");
-
-                        else
-
-                            $('#error_msg').html("<span class='error_msg'>操作已成功完成</span>");
-
-                    }
-
-                    $('#error_msg').show("fast");
-
-                }
 
             });
 
